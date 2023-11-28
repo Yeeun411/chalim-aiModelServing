@@ -3,7 +3,7 @@
 
 ***
 ## Description
-- image : input 이미지가 저장되는 공간
+- image : input image 저장 공간
 - inference_result : output text 저장 공간
 
 ## Features 
