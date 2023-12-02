@@ -12,6 +12,6 @@ python3 tools/infer/predict_system_num.py  \
     --rec_model_dir='./model/rec_nummodel_dir/' \
     --image_dir="./image" \
     --rec_image_shape="3, 48, 320" \
-    --draw_img_save_dir='./result/number/' \
+    --draw_img_save_dir='./inference_results/number/' \
     --rec_char_dict_path="./ppocr/utils/en_dict.txt" \
     --use_gpu=False
