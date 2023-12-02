@@ -13,11 +13,11 @@
 ## Performance   
 | Precison | Recall | HMean |
 | ------ | ------ | ------ |
-| 0.8 | 0.71 | 0.73 |
+| 0.83 | 0.72 | 0.77 |
 
 ## Statement
-- Detection 모델 성능 개선 중
-- 숫자 인식 불가 이슈
+- Detection 모델 성능 개선 완료
+- 문자 인식 모델, 숫자 인식 모델 2개로 구축
 
 ## run
 
