@@ -37,16 +37,16 @@ def get_final_info(number_info, text_info):
     return final
 
 def make_final():
-    image_list = os.listdir('./image/')
+    image_list = os.listdir('servingApp/aiModel/image/')
     num_image = len(image_list)
 
-    number = open("./inference_results/number/system_results.txt", 'r')
+    number = open("servingApp/aiModel/inference_results/number/system_results.txt", 'r')
     line_number = number.readlines()
 
-    text = open("./inference_results/system_results.txt", 'r')
+    text = open("servingApp/aiModel/inference_results/system_results.txt", 'r')
     line_text = text.readlines()
 
-    result = open("./inference_results/final_results.txt", 'w')
+    result = open("servingApp/aiModel/inference_results/final_results.txt", 'w')
 
     for i in range(num_image):
         number_line = line_number[i].split('\t')
