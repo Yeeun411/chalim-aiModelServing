@@ -8,8 +8,19 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/model', methods=['POST'])
-def run_model():
+ALLOWED_LANGUAGES = {"english", "japanese", "chinese"}
+
+@app.route('/translate/<language>', methods=['POST'])
+def run_model(language):
+
+    # 언어 잘 전달됐는지 확인
+    if language.lower() not in ALLOWED_LANGUAGES:
+        return jsonify({'error': 'Invalid language'}), 400
+
+    # Print the received language
+    print("Received language:", language)
+
+
     # 이미지 이름 잘 전달됐는지 확인
     if 'imageName' not in request.form:
         return jsonify({'error': 'No imageName provided'}), 400
@@ -65,7 +76,7 @@ def run_model():
             inference_results_path = './inference_results/'+image_name_result
             os.remove(inference_results_path)
             os.remove(image_path)
-            open(results_path, 'w').close()
+            # open(results_path, 'w').close()
 
             return {
                 "imageName": image_name_result,
