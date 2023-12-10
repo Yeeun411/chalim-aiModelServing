@@ -1,9 +1,12 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 import subprocess
 import os
 import time
 from flask_cors import CORS
 import json
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+from io import BytesIO
 
 app = Flask(__name__)
 CORS(app)
@@ -93,6 +96,34 @@ def run_model(language):
 def is_model_done():
     results_path = './inference_results/final_results.txt'
     return os.path.exists(results_path) and os.path.getsize(results_path) > 0
+
+
+#워드클라우드
+def wordcloud(data):
+    wordcloud = WordCloud(
+        font_path='doc/fonts/easter.ttf',
+        width=800, height=400, background_color='white',
+        colormap='Oranges'
+    ).generate_from_frequencies(data)
+
+    plt.figure(figsize=(10, 5))
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis('off')
+
+    img_buffer = BytesIO()
+    plt.savefig(img_buffer, format='png')
+    img_buffer.seek(0)
+
+    return img_buffer
+
+@app.route('/wordcloud', methods=['POST'])
+def generate_wordcloud():
+    try:
+        data = request.get_json()
+        img_buffer = wordcloud(data)
+        return send_file(img_buffer, mimetype='image/png')
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
