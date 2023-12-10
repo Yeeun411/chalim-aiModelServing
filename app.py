@@ -79,7 +79,7 @@ def run_model(language):
             inference_results_path = './inference_results/'+image_name_result
             os.remove(inference_results_path)
             os.remove(image_path)
-            # open(results_path, 'w').close()
+            open(results_path, 'w').close()
 
             return {
                 "imageName": image_name_result,
