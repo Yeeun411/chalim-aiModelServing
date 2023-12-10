@@ -8,7 +8,9 @@ WORKDIR /app
 COPY requirements.txt /app/
 
 # 의존성 설치
-RUN pip install --no-cache-dir -r requirements.txt
+# requirements.txt에 있는 모든 패키지를 설치한 후 추가적으로 Flask, Flask-CORS, wordcloud를 설치
+RUN pip install --no-cache-dir -r requirements.txt && \
+    pip install flask flask-cors wordcloud
 
 # 애플리케이션 코드 복사
 COPY . /app
