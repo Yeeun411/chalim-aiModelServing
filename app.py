@@ -99,7 +99,7 @@ def is_model_done():
 
 
 #워드클라우드
-def generate_wordcloud(data):
+def wordcloud(data):
     wordcloud = WordCloud(
         font_path='doc/fonts/easter.ttf',
         width=800, height=400, background_color='white',
@@ -117,10 +117,10 @@ def generate_wordcloud(data):
     return img_buffer
 
 @app.route('/wordcloud', methods=['POST'])
-def generate_wordcloud_endpoint():
+def generate_wordcloud():
     try:
         data = request.get_json()
-        img_buffer = generate_wordcloud(data)
+        img_buffer = wordcloud(data)
         return send_file(img_buffer, mimetype='image/png')
     except Exception as e:
         return jsonify({'error': str(e)}), 500
